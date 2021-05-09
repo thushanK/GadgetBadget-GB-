@@ -16,10 +16,10 @@ $(document).on("click", "#btnCreateAccount", function(event){
  	{ 
  		url : "UserAPI", 
  		type : type, 
- 		data : $("#formUser").serialize(), 
+ 		data : $("#formItem").serialize(), 
  		dataType : "text", 
 	 	complete : function(response, status) { 
- 			onUserSaveComplete(response.responseText, status); 
+ 			onItemSaveComplete(response.responseText, status); 
 	} 
  	}); 
 });
@@ -57,7 +57,7 @@ function validateLoginForm(){
 }
 
 
-function onUserSaveComplete(response, status){ 
+function onItemSaveComplete(response, status){ 
 	if (status == "success") { 
  		var resultSet = JSON.parse(response); 
  		if (resultSet.status.trim() == "success") { 
@@ -76,39 +76,5 @@ function onUserSaveComplete(response, status){
  		$("#alertError").show(); 
  	}
 		$("#hidItemIDSave").val(""); 
-		$("#formUser")[0].reset(); 
-}
-
-
-$(document).on("click", ".btnRemove", function(event) { 
-		 $.ajax( 
-		 	{ 
-		 	url : "UserAPI", 
-		 	type : "DELETE", 
-		 	data : "userID=" + $(this).data("userid"),
-		 	dataType : "text", 
-		 	complete : function(response, status) { 
-		 		onItemDeleteComplete(response.responseText, status); 
-		 	} 
-		}); 
-})
-		
-function onItemDeleteComplete(response, status){ 
-	if (status == "success") { 
- 		var resultSet = JSON.parse(response); 
- 		if (resultSet.status.trim() == "success") { 
- 			$("#alertSuccess").text("Successfully deleted."); 
- 			$("#alertSuccess").show(); 
- 			$("#divItemsGrid").html(resultSet.data); 
- 		} else if (resultSet.status.trim() == "error") { 
- 			$("#alertError").text(resultSet.data); 
- 			$("#alertError").show(); 
- 		} 
- 	} else if (status == "error") { 
- 		$("#alertError").text("Error while deleting."); 
- 		$("#alertError").show(); 
- 	} else { 
- 		$("#alertError").text("Unknown error while deleting.."); 
- 		$("#alertError").show(); 
- 	} 
+		$("#formItem")[0].reset(); 
 }

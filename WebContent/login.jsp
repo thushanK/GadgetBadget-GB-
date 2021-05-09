@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="Views/bootstrap.min.css">
 <link rel="stylesheet" href="Views/login.css" />
 <script src="Components/jquery-3.6.0.min.js"></script>
-<script src="Components/user.js"></script>
+<script src="Components/login.js"></script>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>

@@ -38,7 +38,8 @@ public class User {
 	 
 			preparedStmt.execute();
 			con.close();
-			output = "{\"status\":\"success\", \"data\": \"" + userID + "\"}"; 
+			String newUser = readAllUser(); 
+			output = "{\"status\":\"success\", \"data\": \"" + newUser + "\"}"; 
 		}
 		catch (Exception e){
 			output = "{\"status\":\"error\", \"data\": \"Error while creating the user.\"}"; 
@@ -71,38 +72,71 @@ public class User {
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			output = "Updated successfully";
+			 String newUser = readAllUser(); 
+			 output = "{\"status\":\"success\", \"data\": \"" + newUser + "\"}"; 
 		 	}catch (Exception e){
-		 		output = "Error while updating the item.";
-		 		System.err.println(e.getMessage());
+		 		output = "{\"status\":\"error\", \"data\": \"Error while updating the User Account.\"}"; 
+		 		 System.err.println(e.getMessage());
 		 	}
 		 	return output;
 		 }
+	
+	public String deleteUser(String userID) 
+	 { 
+	 String output = ""; 
+	 try
+	 { 
+	 Connection con = connect(); 
+	 if (con == null) 
+	 { 
+	 return "Error while connecting to the database for deleting."; 
+	 } 
+	 // create a prepared statement
+	 String query = "delete from user_ where userID=?"; 
+	 PreparedStatement preparedStmt = con.prepareStatement(query); 
+	 // binding values
+	 preparedStmt.setInt(1, Integer.parseInt(userID)); 
+	 // execute the statement
+	 preparedStmt.execute(); 
+	 con.close(); 
+	 String newUser = readAllUser(); 
+	 output = "{\"status\":\"success\", \"data\": \"" + newUser + "\"}"; 
+	 } 
+	 catch (Exception e) 
+	 { 
+	 output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}"; 
+	 System.err.println(e.getMessage()); 
+	 } 
+	 return output; 
+	 } 
+//	}
 
-	public String deleteUser(String itemID){
-	 
-		String output = "";
-		try{
-	 
-			Connection con = connect();
-			if (con == null){
-				return "Error while connecting to the database for deleting."; 
-			}
-			// create a prepared statement
-			String query = "delete from items where itemID=?";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-			// binding values
-			preparedStmt.setInt(1, Integer.parseInt(itemID));
-			// execute the statement
-			preparedStmt.execute();
-			con.close();
-			output = "Deleted successfully";
-		}catch (Exception e){
-			output = "Error while deleting the item.";
-			System.err.println(e.getMessage());
-		}
-		return output;
-	 }
+
+//	public String deleteUser(String userID){
+//	 
+//		String output = "";
+//		try{
+//	 
+//			Connection con = connect();
+//			if (con == null){
+//				return "Error while connecting to the database for deleting."; 
+//			}
+//			// create a prepared statement"DELETE FROM `user_` WHERE `user_`.`userID` = 19"?
+//			String query = "delete from user_ where userID=?";
+//			PreparedStatement preparedStmt = con.prepareStatement(query);
+//			// binding values
+//			preparedStmt.setInt(1, Integer.parseInt(userID));
+//			// execute the statement
+//			preparedStmt.execute();
+//			 con.close(); 
+//			 String newUser = readAllUser(); 
+//			 output = "{\"status\":\"success\", \"data\": \"" + newUser + "\"}";  
+//		}catch (Exception e){
+//			output = "{\"status\":\"error\", \"data\": \"Error while deleting the User Account.\"}"; 
+//			System.err.println(e.getMessage()); 
+//		}
+//		return output;
+//	 }
 	
 	//to read all user
 	public String readAllUser(){
@@ -143,10 +177,10 @@ public class User {
 				output += "<td>" + Country + "</td>";
 				output += "<td>" + ContactNumber + "</td>";
 				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>" + 
-						"<td><form method='post' action='items.jsp'>" + 
-						"<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>" + 
-						"<input name='itemID' type='hidden' value='" + userID + "'>" + "</form></td></tr>";
+				output += "<td><input name='btnUpdate' type='button' value='Update' "
+						+ "class='btnUpdate btn btn-secondary' data-userid='" + userID + "'></td>"
+						+ "<td><input name='btnRemove' type='button' value='Remove' "
+						+ "class='btnRemove btn btn-danger' data-userid='" + userID + "'></td></tr>"; 
 			}
 			con.close();
 			// Complete the html table
