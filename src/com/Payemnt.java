@@ -38,11 +38,12 @@ public class Payemnt {
 	 
 			preparedStmt.execute();
 			con.close();
-			output = "Inserted successfully";
+			 String newPayemnt = getAllPayment(); 
+			 output = "{\"status\":\"success\", \"data\": \"" + newPayemnt + "\"}"; 
 		}
 		catch (Exception e){
-			output = "Error while inserting the item.";
-			System.err.println(e.getMessage());
+			output = "{\"status\":\"error\", \"data\": \"Error while inserting the item.\"}"; 
+			 System.err.println(e.getMessage());
 		}
 		return output;
 	 }
@@ -62,7 +63,7 @@ public class Payemnt {
 					"<th>productID</th>" +
 					"<th>Ammount</th>" +
 					"<th>Date</th>" +
-					"<th>Remove</th></tr>";
+					"<th>Update</th><th>Remove</th></tr>";
 
 			String query = "select * from payment";
 			Statement stmt = con.createStatement();
@@ -83,10 +84,10 @@ public class Payemnt {
 				output += "<td>" + Ammount + "</td>";
 				output += "<td>" + Date + "</td>";
 				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>" + 
-						"<td><form method='post' action='items.jsp'>" + 
-						"<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>" + 
-						"<input name='itemID' type='hidden' value='" + paymentID + "'>" + "</form></td></tr>";
+				output += "<td><input name='btnUpdate' type='button' value='Update' "
+						+ "class='btnUpdate btn btn-secondary' data-itemid='" + paymentID + "'></td>"
+						+ "<td><input name='btnRemove' type='button' value='Remove' "
+						+ "class='btnRemove btn btn-danger' data-itemid='" + paymentID + "'></td></tr>"; 
 			}
 			con.close();
 			// Complete the html table
@@ -117,10 +118,12 @@ public class Payemnt {
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			output = "Deleted successfully";
+			 String newPayemnt = getAllPayment(); 
+			 output = "{\"status\":\"success\", \"data\": \"" + newPayemnt + "\"}"; 
+		
 		}catch (Exception e){
-			output = "Error while deleting the item.";
-			System.err.println(e.getMessage());
+			output = "{\"status\":\"error\", \"data\": \"Error while inserting the item.\"}"; 
+			 System.err.println(e.getMessage());
 		}
 		return output;
 	 }
