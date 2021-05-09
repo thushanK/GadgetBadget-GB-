@@ -48,7 +48,7 @@ public class User {
 		return output;
 	 }
 	
-	public String updateUser(String userID, String LastName, String FirstName, String Email, String Password, String Country, String ContactNumber){
+	public String updateUser(String ID, String LastName, String FirstName, String Email, String Password, String Country, String ContactNumber){
 		 
 		String output = "";
 		 
@@ -58,7 +58,7 @@ public class User {
 				return "Error while connecting to the database for updating."; 
 			}
 			// create a prepared statement
-			String query = "UPDATE user_ SET LastName=?,FirstName=?,Email=?,Password=?,Country=?,ContactNumber=? WHERE userID=?";
+			String query = "UPDATE user_ SET  LastName=?,FirstName=?,Email=?,Password=?,Country=?,ContactNumber=? WHERE userID=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
 			
@@ -68,47 +68,43 @@ public class User {
 			preparedStmt.setString(4, Password);
 			preparedStmt.setString(5, Country);
 			preparedStmt.setString(6, ContactNumber);
-			preparedStmt.setInt(7, Integer.parseInt(userID));
+			preparedStmt.setInt(7, Integer.parseInt(ID));
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
 			String newUser = readAllUser(); 
 			output = "{\"status\":\"success\", \"data\": \"" + newUser + "\"}"; 
 		 	}catch (Exception e){
-		 		 output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}"; 
+		 		 output = "{\"status\":\"error\", \"data\": \"Error while deleting the user account.\"}"; 
 		 		 System.err.println(e.getMessage());
 		 	}
 		 	return output;
 		 }
 	
-	public String deleteUser(String userID) 
-	 { 
-	 String output = ""; 
-	 try
-	 { 
-	 Connection con = connect(); 
-	 if (con == null) 
-	 { 
-	 return "Error while connecting to the database for deleting."; 
-	 } 
-	 // create a prepared statement
-	 String query = "delete from user_ where userID=?"; 
-	 PreparedStatement preparedStmt = con.prepareStatement(query); 
-	 // binding values
-	 preparedStmt.setInt(1, Integer.parseInt(userID)); 
-	 // execute the statement
-	 preparedStmt.execute(); 
-	 con.close(); 
-	 String newUser = readAllUser(); 
-	 output = "{\"status\":\"success\", \"data\": \"" + newUser + "\"}"; 
-	 } 
-	 catch (Exception e) 
-	 { 
-	 output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}"; 
-	 System.err.println(e.getMessage()); 
-	 } 
-	 return output; 
-	 } 
+	public String deleteUser(String userID) { 
+		String output = ""; 
+		try{ 
+			Connection con = connect(); 
+			if (con == null) { 
+				return "Error while connecting to the database for deleting."; 
+			} 
+			// create a prepared statement
+			String query = "delete from user_ where userID=?"; 
+			PreparedStatement preparedStmt = con.prepareStatement(query); 
+			// binding values
+			preparedStmt.setInt(1, Integer.parseInt(userID)); 
+			// execute the statement
+			preparedStmt.execute(); 
+			con.close(); 
+			String newUser = readAllUser(); 
+			output = "{\"status\":\"success\", \"data\": \"" + newUser + "\"}"; 
+		} catch (Exception e) { 
+			output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}"; 
+			System.err.println(e.getMessage()); 
+		} 
+		return output; 
+	}
+	
 	//to read all user
 	public String readAllUser(){
 		

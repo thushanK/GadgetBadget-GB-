@@ -117,6 +117,7 @@ function onItemDeleteComplete(response, status){
 $(document).on("click", ".btnUpdate", function(event) {
  
 		$("#hidItemIDSave").val($(this).data("userID")); 
+		
 		$("#LastName").val($(this).closest("tr").find('td:eq(1)').text()); 
 		$("#FirstName").val($(this).closest("tr").find('td:eq(2)').text()); 
 	 	$("#Email").val($(this).closest("tr").find('td:eq(3)').text()); 

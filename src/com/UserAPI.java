@@ -61,13 +61,14 @@ public class UserAPI extends HttpServlet {
 			Map paras = getParasMap(request); 
 			
 			String output = userObj.updateUser(paras.get("hidItemIDSave").toString(), 
+					
 					paras.get("LastName").toString(), 
 					paras.get("FirstName").toString(), 
 					paras.get("Email").toString(),
 					paras.get("Password").toString(), 
-					paras.get("Country").toString(), 
-					paras.get("itemDesc").toString()); 
-			response.getWriter().write(output); 
+					paras.get("Country").toString(),
+					paras.get("ContactNumber").toString()); 
+					response.getWriter().write(output); 
 	}
 
 	/**
