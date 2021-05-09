@@ -16,19 +16,25 @@
 
 <div class="container" id="container">
   <div class="form-container sign-up-container">
-    <form action="RegisterControllerServlet" method="post">
-      <h1>Create Account</h1>
+  
+	<form id="formItem" name="formItem">
+	 <h1>Create Account</h1>
  
       <span>or use your email for registration</span>
-      <input type="text" placeholder="LastName"  name="LastName"/>
-      <input type="email" placeholder="FirstName" name="FirstName" />
-      <input type="password" placeholder="Email" name="Email"/>
-      <input type="text" placeholder="Password" name="Password"/>
-      <input type="text" placeholder="Country" name="Country"/>
-      <input type="text" placeholder="Contact Number" name="ContactNumber"/>
+            <input type="text" placeholder="LastName"  name="LastName" id="LastName"/>
+      <input type="text" placeholder="FirstName" name="FirstName" id="FirstName" />
+      <input type="text" placeholder="Email" name="Email" id="Email"/>
+      <input type="text" placeholder="Password" name="Password" id="Password"/>
+      <input type="text" placeholder="Country" name="Country" id="Country" />
+      <input type="text" placeholder="Contact Number" id="ContactNumber" name="ContactNumber" />
       <br>
-      <button>Sign Up</button>
-    </form>
+      
+	
+		<button id="btnCreateAccount" name="btnCreateAccount" type="button" value="Save" >Sign Up</button>
+		<input type="hidden" id="hidItemIDSave" name="hidItemIDSave" value="">
+		
+	</form>
+
   </div>
   <div class="form-container sign-in-container">
     <form action="LoginControllerServlet" method="post">
@@ -51,11 +57,14 @@
       <div class="overlay-panel overlay-right">
         <h1>Hello, Friend!</h1>
         <p>Enter your personal details and start journey with us</p>
-        <button class="ghost" id="signUp">Sign Up</button>
+        <button class="ghost" name="signUp" id="signUp">Sign Up</button>
+        	
       </div>
     </div>
   </div>
 </div>
+
+
 
 <!-- <footer>
 

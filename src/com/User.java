@@ -38,11 +38,11 @@ public class User {
 	 
 			preparedStmt.execute();
 			con.close();
-			output = "Inserted successfully";
+			output = "{\"status\":\"success\", \"data\": \"" + userID + "\"}"; 
 		}
 		catch (Exception e){
-			output = "Error while inserting the item.";
-			System.err.println(e.getMessage());
+			output = "{\"status\":\"error\", \"data\": \"Error while creating the user.\"}"; 
+			 System.err.println(e.getMessage()); 
 		}
 		return output;
 	 }
