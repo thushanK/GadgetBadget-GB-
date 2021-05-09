@@ -50,7 +50,7 @@ public class UserAPI extends HttpServlet {
 				request.getParameter("Country"),
 				request.getParameter("ContactNumber"));
 		
-				response.getWriter().write(output);
+			
 				response.getWriter().write(output);
 	}
 
@@ -58,7 +58,16 @@ public class UserAPI extends HttpServlet {
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+			Map paras = getParasMap(request); 
+			
+			String output = userObj.updateUser(paras.get("hidItemIDSave").toString(), 
+					paras.get("LastName").toString(), 
+					paras.get("FirstName").toString(), 
+					paras.get("Email").toString(),
+					paras.get("Password").toString(), 
+					paras.get("Country").toString(), 
+					paras.get("itemDesc").toString()); 
+			response.getWriter().write(output); 
 	}
 
 	/**

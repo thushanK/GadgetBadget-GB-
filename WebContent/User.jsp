@@ -16,17 +16,17 @@
 
 			<form id="formUser" name="formUser">
 			
-				LastName:
+				Last Name:
 				<input id="LastName" name="LastName" type="text" class="form-control form-control-sm"><br>
-		 		FirstName:
+		 		First Name:
 				<input id="FirstName" name="FirstName" type="text" class="form-control form-control-sm"><br> 
 				Email:
 				<input id="Email" name="Email" type="text" class="form-control form-control-sm"><br>
-		 		Item Password:
+		 		Password:
 				<input id="Password" name="Password" type="text" class="form-control form-control-sm"><br>
 				Country:
 				<input id="Country" name="Country" type="text" class="form-control form-control-sm"><br>
-				ContactNumber:
+				Contact Number:
 				<input id="ContactNumber" name="ContactNumber" type="text" class="form-control form-control-sm"><br>
 
       			<input id="btnCreateAccount" name="btnCreateAccount" type="button" value="Save" class="btn btn-primary">
