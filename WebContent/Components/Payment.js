@@ -14,7 +14,7 @@ $(document).on("click", "#btnMakePayemnt", function(event){
  	
  	$.ajax( 
  	{ 
- 		url : "PayemntAPI", 
+ 		url : "PaymentAPI", 
  		type : type, 
  		data : $("#formPayemnt").serialize(), 
  		dataType : "text", 
@@ -80,23 +80,23 @@ function onMakePaymentComplete(response, status){
 $(document).on("click", ".btnRemove", function(event) { 
 		 $.ajax( 
 		 	{ 
-		 	url : "PayemntAPI", 
+		 	url : "PaymentAPI", 
 		 	type : "DELETE", 
-		 	data : "paymentID =" + $(this).data("paymentID "),
+		 	data : "paymentID=" + $(this).data("paymentid"),
 		 	dataType : "text", 
 		 	complete : function(response, status) { 
-		 		onCanclePayementComplete(response.responseText, status); 
+		 		onItemDeleteComplete(response.responseText, status); 
 		 	} 
 		}); 
 })
 		
-function onCanclePayementComplete(response, status){ 
+function onItemDeleteComplete(response, status){ 
 	if (status == "success") { 
  		var resultSet = JSON.parse(response); 
  		if (resultSet.status.trim() == "success") { 
  			$("#alertSuccess").text("Successfully deleted."); 
  			$("#alertSuccess").show(); 
- 			$("#divPayemntGrid").html(resultSet.data); 
+ 			$("#divItemsGrid").html(resultSet.data); 
  		} else if (resultSet.status.trim() == "error") { 
  			$("#alertError").text(resultSet.data); 
  			$("#alertError").show(); 

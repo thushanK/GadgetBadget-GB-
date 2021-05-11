@@ -2,7 +2,7 @@ package com;
 
 import java.sql.*; 
 
-public class Payemnt {
+public class Payment {
 	
 	private Connection connect(){
 		Connection con = null;
@@ -63,7 +63,7 @@ public class Payemnt {
 					"<th>productID</th>" +
 					"<th>Ammount</th>" +
 					"<th>Date</th>" +
-					"<th>Update</th><th>Remove</th></tr>";
+					"<th>Cancle</th></tr>";
 
 			String query = "select * from payment";
 			Statement stmt = con.createStatement();
@@ -84,10 +84,8 @@ public class Payemnt {
 				output += "<td>" + Ammount + "</td>";
 				output += "<td>" + Date + "</td>";
 				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' "
-						+ "class='btnUpdate btn btn-secondary' data-itemid='" + paymentID + "'></td>"
-						+ "<td><input name='btnRemove' type='button' value='Remove' "
-						+ "class='btnRemove btn btn-danger' data-itemid='" + paymentID + "'></td></tr>"; 
+				output += "<td><input name='btnRemove' type='button' value='Cancle' "
+						+ "class='btnRemove btn btn-danger' data-paymentid='" + paymentID	 + "'></td></tr>"; 
 			}
 			con.close();
 			// Complete the html table
@@ -101,32 +99,31 @@ public class Payemnt {
 	
 	
 
-	public String canclePayment(String paymentID){
-	 
-		String output = "";
-		try{
-	 
-			Connection con = connect();
-			if (con == null){
+
+	
+	public String canclePayment(String paymentID) { 
+		String output = ""; 
+		try{ 
+			Connection con = connect(); 
+			if (con == null) { 
 				return "Error while connecting to the database for deleting."; 
-			}
+			} 
 			// create a prepared statement
 			String query = "delete from payment where paymentID=?";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
+			PreparedStatement preparedStmt = con.prepareStatement(query); 
 			// binding values
-			preparedStmt.setInt(1, Integer.parseInt(paymentID));
+			preparedStmt.setInt(1, Integer.parseInt(paymentID)); 
 			// execute the statement
-			preparedStmt.execute();
-			con.close();
-			 String newPayemnt = getAllPayment(); 
-			 output = "{\"status\":\"success\", \"data\": \"" + newPayemnt + "\"}"; 
-		
-		}catch (Exception e){
-			output = "{\"status\":\"error\", \"data\": \"Error while inserting the item.\"}"; 
-			 System.err.println(e.getMessage());
-		}
-		return output;
-	 }
+			preparedStmt.execute(); 
+			con.close(); 
+			String newPayemnt = getAllPayment(); 
+			output = "{\"status\":\"success\", \"data\": \"" + newPayemnt + "\"}"; 
+		} catch (Exception e) { 
+			output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}"; 
+			System.err.println(e.getMessage()); 
+		} 
+		return output; 
+	}
 	
 
 }
