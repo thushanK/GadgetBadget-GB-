@@ -113,17 +113,21 @@ function onItemDeleteComplete(response, status){
  	} 
 }
 
+
+
 // UPDATE==========================================
-$(document).on("click", ".btnUpdate", function(event) {
- 
-		$("#hidItemIDSave").val($(this).data("userID")); 
-		
-		$("#LastName").val($(this).closest("tr").find('td:eq(1)').text()); 
-		$("#FirstName").val($(this).closest("tr").find('td:eq(2)').text()); 
-	 	$("#Email").val($(this).closest("tr").find('td:eq(3)').text()); 
-		$("#Password").val($(this).closest("tr").find('td:eq(4)').text()); 
-		$("#Country").val($(this).closest("tr").find('td:eq(5)').text()); 
-		$("#ContactNumber").val($(this).closest("tr").find('td:eq(6)').text()); 
-});
+$(document).on("click", ".btnUpdate", function(event)
+		{ 
+		$("#hidItemIDSave").val($(this).data("userid")); 
+		 $("#LastName").val($(this).closest("tr").find('td:eq(1)').text()); 
+		 $("#FirstName").val($(this).closest("tr").find('td:eq(2)').text()); 
+		 $("#Email").val($(this).closest("tr").find('td:eq(3)').text()); 
+		 $("#Password").val($(this).closest("tr").find('td:eq(4)').text()); 
+		 $("#Country").val($(this).closest("tr").find('td:eq(5)').text()); 
+		 $("#ContactNumber").val($(this).closest("tr").find('td:eq(6)').text()); 
+		});
+
+
+
 
 

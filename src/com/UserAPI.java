@@ -40,10 +40,11 @@ public class UserAPI extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String output = userObj.createUser(request.getParameter("hidItemIDSave"), 
+
+				 
+		String output = userObj.createUser(request.getParameter("LastName"), 
 				
-				request.getParameter("LastName"), 
+	
 				request.getParameter("FirstName"), 
 				request.getParameter("Email"),
 				request.getParameter("Password"),
@@ -58,17 +59,18 @@ public class UserAPI extends HttpServlet {
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			Map paras = getParasMap(request); 
+		
+		Map paras = getParasMap(request); 
+		 String output = userObj.updateUser(paras.get("hidItemIDSave").toString(), 
+		 paras.get("LastName").toString(), 
+		 paras.get("FirstName").toString(), 
+		paras.get("Email").toString(),
+		paras.get("Password").toString(), 
+		paras.get("Country").toString(), 
+		paras.get("ContactNumber").toString()); 
+		response.getWriter().write(output); 
 			
-			String output = userObj.updateUser(paras.get("hidItemIDSave").toString(), 
-					
-					paras.get("LastName").toString(), 
-					paras.get("FirstName").toString(), 
-					paras.get("Email").toString(),
-					paras.get("Password").toString(), 
-					paras.get("Country").toString(),
-					paras.get("ContactNumber").toString()); 
-					response.getWriter().write(output); 
+		
 	}
 
 	/**
